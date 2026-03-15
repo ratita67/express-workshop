@@ -8,14 +8,26 @@
     "express",
     "node.js"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ratita67/express-workshop.git"
+  },
   "license": "ISC",
   "author": "Víctor SOF",
+  "bugs": {
+    "url": "https://github.com/ratita67/express-workshop/issues"
+  },
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "express": "^5.2.1"
+    "nodemon": "^3.1.14"
+  },
+  "homepage": "https://github.com/ratita67/express-workshop#readme",
+  "devDependencies": {
+    "express": "^4.22.1"
   }
 }
