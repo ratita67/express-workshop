@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicia sesión</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+        }
+        .btn-login {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-register {
+            background-color: #6c757d;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Inicia sesión</h1>
+    
+    <div class="form-group">
+        <label for="user_mail">Correo electrónico</label>
+        <input type="email" id="user_mail" placeholder="mauricio@uaq.com">
+    </div>
+    
+    <div class="form-group">
+        <label for="user_password">Contraseña</label>
+        <input type="password" id="user_password" placeholder="••••••">
+    </div>
+    
+    <button id="btn-login" class="btn-login">Entrar</button>
+    <button id="btn-register" class="btn-register">Registro</button>
+    
+    <p style="margin-top: 20px; font-size: 14px;">
+        Usuario de prueba: <b>mauricio@wat.com</b> / <b>123</b><br>
+        O: <b>mauricio@uaq.com</b> / <b>123456</b>
+    </p>
+
+    <script>
+        const url = 'http://localhost:3000';
+
+        // Verificar si ya hay token al cargar
+        window.onload = function() {
+            const token = localStorage.getItem('token');
+            if (token) {
+                window.location.href = 'pokedex.html';
+            }
+        };
+
+        // Evento Login
+        document.getElementById('btn-login').addEventListener('click', async () => {
+            const mail = document.getElementById('user_mail').value;
+            const pass = document.getElementById('user_password').value;
+
+            try {
+                const res = await axios.post(`${url}/login`, {
+                    user_mail: mail,
+                    user_password: pass
+                });
+
+                if (res.data.code === 200) {
+                    localStorage.setItem('token', res.data.token);
+                    alert('¡Login exitoso! Redirigiendo...');
+                    window.location.href = 'pokedex.html';
+                } else {
+                    alert('Error: ' + res.data.message);
+                }
+            } catch (error) {
+                console.error(error);
+                alert('Error de conexión o servidor');
+            }
+        });
+
+        // Evento Registro (puedes implementarlo más tarde)
+        document.getElementById('btn-register').addEventListener('click', () => {
+            alert('Funcionalidad de registro pendiente de implementar');
+            // window.location.href = 'sign.html';
+        });
+    </script>
+</body>
+</html>

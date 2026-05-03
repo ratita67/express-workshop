@@ -1,0 +1,8 @@
+const notFound = (req, res) => {
+    res.status(404).json({
+        code: 404,
+        message: 'Ruta no encontrada'
+    });
+};
+
+module.exports = notFound;

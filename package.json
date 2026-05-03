@@ -24,6 +24,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+<<<<<<< HEAD
+=======
+    "cors": "^2.8.6",
+>>>>>>> master
     "jsonwebtoken": "^9.0.3",
     "morgan": "^1.10.1",
     "mysql": "^2.18.1",
