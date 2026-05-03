@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Pokédex</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1 class="text-center mb-4">Registro</h1>
+                
+                <div class="form-group">
+                    <label for="input-email">Correo electrónico</label>
+                    <input type="email" class="form-control" id="input-email" placeholder="correo@dominio.ext">
+                </div>
+                <div class="form-group">
+                    <label for="input-name">Nombre</label>
+                    <input type="text" class="form-control" id="input-name" placeholder="Mauricio Arturo">
+                </div>
+                <div class="form-group">
+                    <label for="input-pass">Contraseña</label>
+                    <input type="password" class="form-control" id="input-pass" placeholder="***********">
+                </div>
+                
+                <div class="d-flex justify-content-between">
+                    <button id="btn-register" class="btn btn-primary">Registrarme</button>
+                    <button id="btn-login-back" class="btn btn-secondary">Iniciar sesión</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // Lógica simple para el registro
+        document.getElementById('btn-login-back').addEventListener('click', () => {
+            window.location.href = 'login.html';
+        });
+
+        document.getElementById('btn-register').addEventListener('click', () => {
+            const email = document.getElementById('input-email').value;
+            const name = document.getElementById('input-name').value;
+            const pass = document.getElementById('input-pass').value;
+
+            if(!email || !pass) {
+                alert("Por favor llena correo y contraseña");
+                return;
+            }
+
+            // Simulación de envío al servidor (necesitas crear la ruta /register en index.js)
+            axios.post('/register', {
+                user_email: email,
+                user_name: name,
+                user_password: pass
+            })
+            .then(res => {
+                alert("Registro exitoso: " + res.data.message);
+                window.location.href = 'login.html';
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Error al registrar");
+            });
+        });
+    </script>
+</body>
+</html>
